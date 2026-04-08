@@ -28,9 +28,7 @@ export function HomePage() {
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true)
-      const today = new Date().toISOString().split('T')[0]
-
-      const [opportunitiesResult, fullyFundedResult, categoriesCountResult] = await Promise.all([
+      const [opportunitiesResult, fullyFundedResult, categoriesCountResult, usersCountResult] = await Promise.all([
         supabase
           .from('opportunities')
           .select(`
@@ -41,17 +39,15 @@ export function HomePage() {
             )
           `)
           .eq('is_featured', true)
-          .gte('deadline', today)
           .order('deadline', { ascending: true })
           .limit(6),
         supabase
           .from('opportunities')
-          .select('id, funding_type', { count: 'exact' })
-          .gte('deadline', today),
+          .select('id, funding_type, location', { count: 'exact' }),
         supabase
           .from('opportunities')
-          .select('id, opportunity_categories!inner(category_id)', { count: 'exact' })
-          .gte('deadline', today)
+          .select('id, opportunity_categories!inner(category_id)', { count: 'exact' }),
+        supabase.rpc('get_user_count')
       ])
 
       if (opportunitiesResult.data) {
@@ -62,12 +58,21 @@ export function HomePage() {
         const total = fullyFundedResult.data.length
         const fullyFunded = fullyFundedResult.data.filter(o => o.funding_type === 'fully_funded').length
         const fullyFundedPercent = total > 0 ? Math.round((fullyFunded / total) * 100) : 0
+        
+        const countries = new Set<string>()
+        fullyFundedResult.data.forEach(o => {
+          if (o.location && o.location !== 'Online' && o.location !== 'Global') {
+            const parts = o.location.split(',')
+            countries.add(parts[parts.length - 1].trim())
+          }
+        })
+        const countriesCount = Math.max(countries.size, 1)
 
         setStats({
           totalOpportunities: total,
           fullyFundedPercent,
-          countriesCount: 94,
-          usersCount: 18420
+          countriesCount: countriesCount,
+          usersCount: (usersCountResult.data as number) || 1
         })
       }
 

@@ -241,9 +241,6 @@ export function AddOpportunityPage() {
           <Link to="/admin/listings">
             <button className="btn btn-outline">Cancel</button>
           </Link>
-          <button className="btn btn-primary" onClick={handleSubmit} disabled={loading}>
-            {loading ? 'Saving...' : (isEditMode ? 'Update Listing' : 'Publish Listing')}
-          </button>
         </div>
       </div>
 

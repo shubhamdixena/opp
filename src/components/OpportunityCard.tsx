@@ -36,7 +36,7 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
   const primaryCategory = opportunity.opportunity_categories?.[0]?.category
 
   return (
-    <Link to={`/opportunity/${opportunity.slug}`}>
+    <Link to={`/opportunity/${opportunity.slug}`} className="card-link">
       <div className="card">
         <div className="card-head">
           <div className="card-tags">
@@ -89,7 +89,11 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
           )}
         </div>
 
-        <p className="card-desc">{opportunity.description}</p>
+        <p className="card-desc" style={{ marginBottom: '8px' }}>{opportunity.description}</p>
+        <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--terra)', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          View details
+          <svg style={{ width: '12px', height: '12px', stroke: 'currentColor', fill: 'none', strokeWidth: 2 }} viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
 
         <div className="card-footer">
           <div className="card-metas">

@@ -33,7 +33,6 @@ export function CategoryPage() {
         setIsLoadingOpps(true)
         setOppsError(null)
 
-        const today = new Date().toISOString().split('T')[0]
 
         const { data, error } = await supabase
           .from('opportunities')
@@ -45,7 +44,6 @@ export function CategoryPage() {
             )
           `)
           .eq('opportunity_categories.category_id', category.id)
-          .gte('deadline', today)
           .order('deadline', { ascending: true })
 
         if (error) throw error
@@ -203,7 +201,7 @@ export function CategoryPage() {
         </div>
       </section>
 
-      <section className="listing-body">
+      <section>
         <div className="wrap-xl">
           <div className="listing-body">
             <aside className="sidebar-left">

@@ -22,7 +22,7 @@ export function useOpportunities(options: UseOpportunitiesOptions = {}): UseOppo
   const [error, setError] = useState<Error | null>(null)
   const [refetchKey, setRefetchKey] = useState(0)
 
-  const { categorySlug, includeExpired = false, featured, limit } = options
+  const { categorySlug, includeExpired = true, featured, limit } = options
 
   useEffect(() => {
     async function fetchOpportunities() {
@@ -39,11 +39,6 @@ export function useOpportunities(options: UseOpportunitiesOptions = {}): UseOppo
               category:categories(*)
             )
           `)
-
-        if (!includeExpired) {
-          const today = new Date().toISOString().split('T')[0]
-          query = query.gte('deadline', today)
-        }
 
         if (featured !== undefined) {
           query = query.eq('is_featured', featured)

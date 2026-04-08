@@ -27,7 +27,6 @@ export function DashboardPage() {
     async function fetchData() {
       try {
         setLoading(true)
-        const today = new Date().toISOString().split('T')[0]
         const sevenDaysFromNow = new Date()
         sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7)
         const sevenDaysDate = sevenDaysFromNow.toISOString().split('T')[0]
@@ -35,29 +34,22 @@ export function DashboardPage() {
         const [
           opportunitiesRes,
           savedRes,
-          draftRes,
-          archivedRes
+          draftRes
         ] = await Promise.all([
           supabase
             .from('opportunities')
             .select('id, deadline, is_draft', { count: 'exact' })
-            .gte('deadline', today)
             .eq('is_draft', false),
           supabase
             .from('saved_opportunities')
             .select('id', { count: 'exact', head: true }),
           supabase
-            .from('saved_opportunities')
-            .select('id', { count: 'exact', head: true }),
-          supabase
             .from('opportunities')
             .select('id', { count: 'exact' })
-            .eq('is_draft', true),
-          supabase
-            .from('opportunities')
-            .select('id', { count: 'exact' })
-            .lt('deadline', today)
+            .eq('is_draft', true)
         ])
+        
+        const archivedRes = { count: 0 } as any
 
         const activeListings = opportunitiesRes.count || 0
         const expiringThisWeek = opportunitiesRes.data?.filter(opp =>
@@ -86,7 +78,6 @@ export function DashboardPage() {
               category:categories(*)
             )
           `)
-          .gte('deadline', today)
           .order('created_at', { ascending: false })
           .limit(5)
 

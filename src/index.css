@@ -106,8 +106,9 @@ button{font-family:inherit;cursor:pointer}
 .see-all svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
 
 /* cards */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
-.card{background-color:var(--warm-white)!important;border:1px solid var(--border)!important;border-radius:var(--r2);padding:22px;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s,border-color .2s;cursor:pointer;position:relative}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;width:100%}
+.card-link{display:block;height:100%;text-decoration:none;color:inherit}
+.card{background-color:var(--warm-white)!important;border:1px solid var(--border)!important;border-radius:var(--r2);padding:22px;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s,border-color .2s;cursor:pointer;position:relative;height:100%}
 .card:hover{box-shadow:var(--sh2);transform:translateY(-2px);border-color:var(--border2)!important}
 .card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
 .card-tags{display:flex;gap:6px;flex-wrap:wrap}
@@ -181,7 +182,7 @@ footer{background-color:var(--cream2)!important;border-top:1px solid var(--borde
 .chip:hover,.chip.on{border-color:var(--terra)!important;color:var(--terra)!important;background-color:var(--peach-light)!important}
 .chip.g-on{border-color:var(--green)!important;color:var(--green)!important;background-color:var(--green-bg)!important}
 
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;width:100%}
 .cat-card{background-color:var(--warm-white)!important;border:1px solid var(--border)!important;border-radius:var(--r2);padding:20px 18px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:all .2s}
 .cat-card:hover{border-color:var(--terra)!important;background-color:var(--peach-light)!important;transform:translateY(-2px);box-shadow:var(--sh)}
 .cat-icon{font-size:24px}
