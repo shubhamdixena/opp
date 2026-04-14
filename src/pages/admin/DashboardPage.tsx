@@ -102,7 +102,7 @@ export function DashboardPage() {
         <div className="page-head-left">
           <div className="page-eyebrow">Overview</div>
           <div className="page-title">Good morning, Admin 👋</div>
-          <div className="page-sub">Here's what's happening with Meridian today.</div>
+          <div className="page-sub">Here's what's happening with Opportunity For You today.</div>
         </div>
         <div style={{ display: 'flex', gap: '8px' }}>
           <button className="btn btn-outline">

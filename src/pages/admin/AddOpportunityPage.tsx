@@ -31,6 +31,8 @@ export function AddOpportunityPage() {
     tagIds: [] as string[],
     tagInput: '',
     isFeatured: false,
+    whatYouGet: '',
+    howToApply: '',
   })
 
   const [categories, setCategories] = useState<Category[]>([])
@@ -94,6 +96,8 @@ export function AddOpportunityPage() {
               tagIds: opportunity.opportunity_tags?.map((ot: any) => ot.tag_id) || [],
               tagInput: '',
               isFeatured: opportunity.is_featured || false,
+              whatYouGet: typeof opportunity.benefits === 'string' ? opportunity.benefits : (opportunity.benefits?.what_you_get || ''),
+              howToApply: opportunity.eligibility?.how_to_apply || '',
             })
           }
         }
@@ -147,6 +151,7 @@ export function AddOpportunityPage() {
         nationalities: formData.eligibleNationalities || null,
         age_range: formData.ageRange || null,
         sector: formData.sector || null,
+        how_to_apply: formData.howToApply || null,
       }
 
       const opportunityData = {
@@ -166,6 +171,7 @@ export function AddOpportunityPage() {
         application_url: formData.applicationUrl,
         is_featured: formData.isFeatured,
         is_new: !isEditMode,
+        benefits: formData.whatYouGet || null,
         updated_at: new Date().toISOString(),
       }
 
@@ -417,6 +423,26 @@ export function AddOpportunityPage() {
                     ></textarea>
                     <span className="form-hint">First 280 characters will be shown on cards. Full description appears on detail page.</span>
                   </div>
+                  <div className="form-group full">
+                    <label className="form-label">What You Get (Benefits)</label>
+                    <textarea
+                      className="form-textarea"
+                      placeholder="Simple description of benefits, funding, what is covered..."
+                      style={{ minHeight: '100px' }}
+                      value={formData.whatYouGet}
+                      onChange={(e) => setFormData({ ...formData, whatYouGet: e.target.value })}
+                    ></textarea>
+                  </div>
+                  <div className="form-group full">
+                    <label className="form-label">How to Apply</label>
+                    <textarea
+                      className="form-textarea"
+                      placeholder="Requirements, documents needed, steps to apply..."
+                      style={{ minHeight: '100px' }}
+                      value={formData.howToApply}
+                      onChange={(e) => setFormData({ ...formData, howToApply: e.target.value })}
+                    ></textarea>
+                  </div>
                 </div>
               </div>
 
@@ -505,7 +531,7 @@ export function AddOpportunityPage() {
                   onChange={(e) => setFormData({ ...formData, applicationUrl: e.target.value })}
                   required
                 />
-                <span className="form-hint">Must link to the official application page. Meridian never links to third parties.</span>
+                <span className="form-hint">Must link to the official application page. Opportunity For You never links to third parties.</span>
               </div>
             </div>
 

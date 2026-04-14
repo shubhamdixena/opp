@@ -196,54 +196,27 @@ export function OpportunityDetailPage() {
             </div>
           </div>
 
-          <div className="content-card">
-            <h2 className="section-title">What You Get</h2>
-            <div className="benefits-list">
-              <div className="benefit-item">
-                <div className="benefit-icon">✈️</div>
-                <div>
-                  <div className="benefit-title">Travel & Accommodation — Fully Covered</div>
-                  <div className="benefit-desc">
-                    All travel to in-person convenings, accommodations, and meals covered for the full fellowship period.
-                  </div>
-                </div>
-              </div>
-              <div className="benefit-item">
-                <div className="benefit-icon">🤝</div>
-                <div>
-                  <div className="benefit-title">Executive Coaching & Mentorship</div>
-                  <div className="benefit-desc">
-                    One-on-one coaching sessions with experienced facilitators and access to the broader network.
-                  </div>
-                </div>
-              </div>
-              <div className="benefit-item">
-                <div className="benefit-icon">🌐</div>
-                <div>
-                  <div className="benefit-title">Global Cohort Network</div>
-                  <div className="benefit-desc">
-                    Join a lifelong community of fellows — 500+ leaders from 60+ countries.
-                  </div>
-                </div>
+          {(opportunity.benefits) && (
+            <div className="content-card">
+              <h2 className="section-title">What You Get</h2>
+              <div className="prose">
+                <p style={{ whiteSpace: 'pre-wrap' }}>
+                  {typeof opportunity.benefits === 'string' 
+                    ? opportunity.benefits 
+                    : (opportunity.benefits?.what_you_get || 'Funding and resources as specified by the provider.')}
+                </p>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className="content-card">
-            <h2 className="section-title">How to Apply</h2>
-            <div className="prose">
-              <p>Applications must be submitted through the official portal. The application includes:</p>
-              <ul>
-                <li>Personal statement (max 500 words) on your civic work and leadership vision</li>
-                <li>Two reference letters from community leaders or professional supervisors</li>
-                <li>CV / résumé (max 2 pages)</li>
-                <li>Short video introduction (2–3 minutes)</li>
-              </ul>
-              <p>
-                <strong>Important:</strong> All materials must be in English. Incomplete applications will not be reviewed.
-              </p>
+          {(opportunity.eligibility?.how_to_apply) && (
+            <div className="content-card">
+              <h2 className="section-title">How to Apply</h2>
+              <div className="prose">
+                <p style={{ whiteSpace: 'pre-wrap' }}>{opportunity.eligibility.how_to_apply}</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="opp-right">

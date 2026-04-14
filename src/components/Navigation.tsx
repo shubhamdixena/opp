@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Hexagon, User } from 'lucide-react'
+import { User } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import {
   DropdownMenu,
@@ -27,12 +27,9 @@ export function Navigation() {
 
   return (
     <nav className="nav">
-      <Link to="/" className="nav-logo">
-        <div className="nav-logomark">
-          <Hexagon style={{ width: '14px', height: '14px', fill: 'white', stroke: 'white' }} />
-        </div>
-        <span>
-          Meridi<span style={{ color: 'var(--terra)' }}>an</span>
+      <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>
+        <span style={{ fontSize: '18px', fontWeight: 600, color: '#111', letterSpacing: '-0.3px' }}>
+          Opportunity For You
         </span>
       </Link>
 
@@ -44,20 +41,20 @@ export function Navigation() {
           Browse
         </Link>
         <Link
-          to="/category/fellowships"
-          className={location.pathname.includes('fellowships') ? 'active' : ''}
+          to="/category/fellowship"
+          className={location.pathname.includes('fellowship') ? 'active' : ''}
         >
           Fellowships
         </Link>
         <Link
-          to="/category/scholarships"
-          className={location.pathname.includes('scholarships') ? 'active' : ''}
+          to="/category/scholarship"
+          className={location.pathname.includes('scholarship') ? 'active' : ''}
         >
           Scholarships
         </Link>
         <Link
-          to="/category/conferences"
-          className={location.pathname.includes('conferences') ? 'active' : ''}
+          to="/category/conference"
+          className={location.pathname.includes('conference') ? 'active' : ''}
         >
           Conferences
         </Link>
@@ -83,14 +80,9 @@ export function Navigation() {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <>
-          <button className="nav-ghost" onClick={() => navigate('/login')}>
-            Log in
-          </button>
-          <button className="nav-solid" onClick={() => navigate('/signup')}>
-            Get Started →
-          </button>
-        </>
+        <button className="nav-ghost" onClick={() => navigate('/login')}>
+          Log in
+        </button>
       )}
     </nav>
   )

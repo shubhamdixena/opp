@@ -42,7 +42,7 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
           <div className="card-tags">
             {primaryCategory && (
               <span className="tag tf">
-                {primaryCategory.emoji || '📋'} {primaryCategory.name}
+                {primaryCategory.name}
               </span>
             )}
             {opportunity.is_featured && (
@@ -77,7 +77,7 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
         <div className="card-org">
           {opportunity.organization ? (
             <>
-              {opportunity.organization.logo_emoji && `${opportunity.organization.logo_emoji} `}
+              
               {opportunity.organization.name}
               {opportunity.organization.country && ` · ${opportunity.organization.country}`}
             </>

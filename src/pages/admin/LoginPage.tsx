@@ -51,7 +51,7 @@ export function LoginPage() {
             marginBottom: '8px',
             letterSpacing: '-.4px'
           }}>
-            Meridian Admin
+            Opportunity For You Admin
           </h1>
           <p style={{ fontSize: '14px', color: 'var(--text4)' }}>
             Sign in to manage opportunities
@@ -73,7 +73,7 @@ export function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@meridian.com"
+              placeholder="admin@example.com"
               required
               style={{
                 width: '100%',

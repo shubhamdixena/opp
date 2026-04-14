@@ -40,7 +40,7 @@ export function HomePage() {
           `)
           .eq('is_featured', true)
           .order('deadline', { ascending: true })
-          .limit(6),
+          .limit(3),
         supabase
           .from('opportunities')
           .select('id, funding_type, location', { count: 'exact' }),
@@ -101,20 +101,20 @@ export function HomePage() {
             <span>{stats.totalOpportunities}+ active opportunities right now</span>
           </div>
 
-          <h1>
-            Find opportunities
+          <h1 style={{ fontSize: 'clamp(40px, 7.5vw, 56px)', letterSpacing: '-1.5px', color: '#000' }}>
+            Discover Your Next
             <br />
-            that <em>open doors</em>
-            <br />
-            worldwide
+            <span className="shimmer-text">
+              Big Opportunity
+            </span>
           </h1>
 
           <p className="hero-sub">
-            Meridian curates verified fellowships, scholarships, conferences, and awards for ambitious young professionals — always linking to the official source.
+            Opportunity For You curates verified fellowships, scholarships, conferences, and awards for ambitious young professionals — always linking to the official source.
           </p>
 
           <div className="hero-btns">
-            <Link to="/category/fellowships">
+            <Link to="/category/fellowship">
               <button className="btn btn-primary">Explore Opportunities →</button>
             </Link>
             <button className="btn btn-outline" onClick={() => navigate(user ? '/profile' : '/signup')}>
@@ -159,7 +159,7 @@ export function HomePage() {
           />
           <button className="search-go" onClick={() => {
             if (searchQuery.trim()) {
-              navigate(`/category/fellowships?search=${encodeURIComponent(searchQuery)}`)
+              navigate(`/category/fellowship?search=${encodeURIComponent(searchQuery)}`)
             }
           }}>Search</button>
         </div>
@@ -177,7 +177,7 @@ export function HomePage() {
                 }
               }}
             >
-              {category.emoji} {category.name}
+              {category.name}
             </button>
           ))}
           <button
@@ -198,7 +198,7 @@ export function HomePage() {
               <div className="eyebrow">Featured this week</div>
               <h2 className="sec-h2">Handpicked Opportunities</h2>
             </div>
-            <Link to="/category/fellowships" className="see-all">
+            <Link to="/category/fellowship" className="see-all">
               Browse all <ArrowRight />
             </Link>
           </div>
@@ -226,9 +226,8 @@ export function HomePage() {
 
           <div className="cat-grid">
             {categories.map((category) => (
-              <Link key={category.id} to={`/category/${category.slug}`}>
+              <Link key={category.id} to={`/category/${category.slug}`} style={{ display: 'block', height: '100%' }}>
                 <div className="cat-card">
-                  <div className="cat-icon">{category.emoji || '📂'}</div>
                   <div className="cat-name">{category.name}</div>
                   <div className="cat-count">
                     {categoryCounts[category.id] || 0} active
@@ -255,7 +254,7 @@ export function HomePage() {
                 <button className="btn-cta-main" onClick={() => navigate('/signup')}>
                   Create Free Profile →
                 </button>
-                <button className="btn-cta-ghost" onClick={() => navigate('/category/fellowships')}>
+                <button className="btn-cta-ghost" onClick={() => navigate('/category/fellowship')}>
                   Browse Without Account
                 </button>
               </div>
@@ -273,7 +272,7 @@ export function HomePage() {
                   <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                 </svg>
               </div>
-              <span>Meridian</span>
+              <span>Opportunity For You</span>
             </div>
             <p className="f-desc">
               Curated global opportunities for ambitious young professionals — connecting you to fellowships, scholarships, and transformative experiences.
@@ -299,7 +298,7 @@ export function HomePage() {
           </div>
         </div>
         <div className="footer-bottom">
-          <div className="footer-copy">© 2026 Meridian. All rights reserved.</div>
+          <div className="footer-copy">© 2026 Opportunity For You. All rights reserved.</div>
         </div>
       </footer>
     </div>
